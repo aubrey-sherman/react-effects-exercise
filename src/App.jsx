@@ -1,38 +1,28 @@
 import { useState } from 'react';
-import logo from './logo.svg'
+import CardGame from './CardGame.jsx';
 import './App.css';
 
 
-/** Component for entire page.
+// App (effect: API call for deck) -> CardGame(deckId, state is cards picked) -> Card
+
+
+/** App to render overall Cards app.
  *
- * Props: none
- * State: none
  *
+ *  App -> CardGame -> Card
 */
 
 function App() {
-  const [count, setCount] = useState(0);
+  const [deck, setDeck] = useState({ id: null, isLoading: true });
 
-  function incrCount() {
-    setCount(count => count + 1);
-  }
+  //useEffect(function fetchDeck);
+
+  if (deck.isLoading) return <i>Loading...</i>;
+
 
   return (
     <div className="App">
-      <main>
-        <img src={logo} className="App-logo" alt="Rithm" />
-        <h1>Rithm React Starter</h1>
-        <p>
-          <button
-              className="btn btn-primary"
-              onClick={incrCount}>
-            Clicked: {count}
-          </button>
-        </p>
-        <p>
-          Edit <code>src/App.jsx</code>
-        </p>
-      </main>
+      <CardGame deckId={deck.id} />
     </div>
   );
 };
